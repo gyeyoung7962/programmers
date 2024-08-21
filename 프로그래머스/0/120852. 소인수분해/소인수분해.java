@@ -7,6 +7,9 @@ class Solution {
         
         int[] answer = {};
 
+
+        boolean flag = true;
+
         List<Integer> list = new ArrayList<>();
 
 
@@ -16,18 +19,31 @@ class Solution {
 
                 list.add(i);
 
-                while (n % i == 0) {
+                while (flag) {
+                    if (n % i == 0) {
+
+                        list.add(i);
+
                         n = n / i;
+                        i++;
+                    } else if (n % i != 0) {
+                        break;
                     }
                 }
             }
+        }
 
-        answer = list.stream().mapToInt(Integer::intValue).toArray();
+        answer = new int[list.size()];
 
-        System.out.println("Arrays.toString(arr) = " + Arrays.toString(answer));
+        for(int i = 0; i < answer.length;i++){
+
+                answer[i] = list.get(i);
+        }
+
+        int[] arr = Arrays.stream(answer).distinct().toArray();
 
 
-        return answer;
-        
+
+        return arr;
     }
 }
